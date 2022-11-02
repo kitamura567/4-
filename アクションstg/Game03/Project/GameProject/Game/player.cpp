@@ -30,7 +30,7 @@ Player::Player(const CVector2D& pos, bool flip) :
 
 	//中心位置設定
 	m_img.SetCenter(32, 32);
-	m_img.SetSize(64, 64);
+	m_img.SetSize(32, 32);
 	m_rect = CRect(-32, -32, 32, 32);
 	//反転フラグ
 	m_flip = flip;
