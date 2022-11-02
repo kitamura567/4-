@@ -6,6 +6,8 @@ enum {
 	eType_Field,
 	eType_Player,
 	eType_Enemy,
+	eType_Enemy_Bullet,
+	eType_Player_Bullet,
 	eType_Bullet,
 	eType_Goal,
 	eType_Effect,
@@ -17,12 +19,15 @@ enum {
 class Base {
 public:
 	
-	float m_rad;
+	
 	CVector2D m_vec;
 	int m_type;
 	CVector2D m_pos;
 	static CVector2D m_scroll;
 	static std::list<Base*>m_list;
+	float m_ang;
+	float m_rad;
+	int	m_hit_id;
 	bool m_kill;
 	Base* Base::FindObject(int type);
 	CRect m_rect;

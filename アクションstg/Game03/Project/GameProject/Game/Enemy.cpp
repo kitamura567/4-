@@ -7,6 +7,10 @@
 //#include"trap.h"
 #include "Bullet.h"
 
+void Enemy::StateWait()
+{
+}
+
 void Enemy::StateIdle()
 {
 	//const float move_speed = 6;
@@ -86,7 +90,7 @@ void Enemy::StateDown()
 
 Enemy::Enemy(const CVector2D& p, bool flip) :
 	Base(eType_Enemy) {
-	m_img = COPY_RESOURCE("trap", CImage);
+	m_img = COPY_RESOURCE("Enemy", CImage);
 	m_img.ChangeAnimation(0);
 	 m_pos = p;
 	m_img.SetCenter(32, 32);
@@ -102,9 +106,9 @@ void Enemy::Update()
 {
 
 	//m_pos_old = m_pos;
-	if (m_is_ground && m_vec.y > GRAVITY * 4)
+	/*if (m_is_ground && m_vec.y > GRAVITY * 4)
 		m_is_ground = false;
-	m_vec.y += GRAVITY;
+	m_vec.y += GRAVITY;*/
 	m_pos += m_vec;
 	//カウントアップ
 	m_cnt++;

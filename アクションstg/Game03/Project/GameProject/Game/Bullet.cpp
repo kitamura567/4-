@@ -3,9 +3,9 @@
 
 //#include"Map.h"
 
-trapbullet::trapbullet(int type, const CVector2D& pos, float ang, float speed) : Base(type)
+Bullet::Bullet(int type, const CVector2D& pos, float ang, float speed) : Base(type)
 {
-	m_img = COPY_RESOURCE("trapbullet", CImage);
+	m_img = COPY_RESOURCE("Bullet", CImage);
 	m_pos = pos;
 
 	m_ang = ang;
@@ -13,20 +13,20 @@ trapbullet::trapbullet(int type, const CVector2D& pos, float ang, float speed) :
 	//	trap = trapbullet;
 }
 
-void trapbullet::Update()
+void Bullet::Update()
 {
 
 	m_vec = CVector2D(sin(m_ang), cos(m_ang)) * m_speed;
 	m_pos += m_vec;
 
 }
-void trapbullet::Draw() {
+void Bullet::Draw() {
 	m_img.SetPos(GetScreenPos(m_pos));
 	m_img.SetAng(m_ang);
 	m_img.Draw();
 }
 
-void trapbullet::Collision(Base* b)
+void Bullet::Collision(Base* b)
 {
 	switch (b->m_type) {
 	/*case eType_Field:
