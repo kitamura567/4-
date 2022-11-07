@@ -9,6 +9,11 @@
 
 void Enemy::StateWait()
 {
+	m_move_cnt += 1;
+	if (m_move_cnt > 180) {
+		m_state = eState_Idle;
+		m_move_cnt = 0;
+	}
 }
 
 void Enemy::StateIdle()
@@ -17,34 +22,22 @@ void Enemy::StateIdle()
 	bool move_flag = false;
 	//const float jump_pow = 12;
 	Base* player = Base::FindObject(eType_Player);
-	if (player) {
-		if (player->m_pos.x < m_pos.x - 32) {
-			//m_pos.x += -move_speed;
-			m_flip = true;
-			move_flag = true;
-		}
-		else
-			if (player->m_pos.x > m_pos.x + 32) {
-				//	m_pos.x += move_speed;
-				m_flip = false;
-				move_flag = true;
-			}
-		/*else {
-			m_state = eState_Attack;
-			m_attack_no++;
-
-		}*/
-		if (--m_cnt <= 0) {
-			m_cnt = rand() % 120 + 180;
-			m_state = eState_Wait;
-		}
-		if (move_flag) {
-			m_img.ChangeAnimation(eAnimRun);
-		}
-		else {
-			m_img.ChangeAnimation(eAnimIdle);
-		}
+	
+	int R = rand() % 3;
+	switch (R)
+	{
+	case 0:
+		m_state = eState_Move;
+		break;
+	case 1:
+		m_state = eState_Rotato;
+		break;
+	case 2:
+		m_state = eState_Wait;
+		break;
 	}
+		
+	
 }
 
 void Enemy::StateAttack()
@@ -88,6 +81,30 @@ void Enemy::StateDown()
 	}
 }
 
+void Enemy::StateMove()
+{
+	//CVector2D DIR(sin(m_ang), cos(m_ang));
+	//m_pos += DIR * 1.0;
+	m_move_cnt += 1;
+	if (m_move_cnt > 180) {
+		m_state = eState_Idle;
+		m_move_cnt = 0;
+	}
+}
+
+void Enemy::StateRotato()
+{
+	//m_ang += DtoR(2);
+	if (m_move_cnt == 1) {
+		m_dir = rand() % 4;
+	}
+	m_move_cnt += 1;
+	if (m_move_cnt > 180) {
+		m_state = eState_Idle;
+		m_move_cnt = 0;
+	}
+}
+
 Enemy::Enemy(const CVector2D& p, bool flip) :
 	Base(eType_Enemy) {
 	m_img = COPY_RESOURCE("Enemy", CImage);
@@ -100,16 +117,17 @@ Enemy::Enemy(const CVector2D& p, bool flip) :
 	m_attack_no = rand();
 	m_damage_no = -1;
 	m_hp = 50;
+	m_dir = eUp;
 }
 
 void Enemy::Update()
 {
-
+	
 	//m_pos_old = m_pos;
 	/*if (m_is_ground && m_vec.y > GRAVITY * 4)
 		m_is_ground = false;
 	m_vec.y += GRAVITY;*/
-	m_pos += m_vec;
+	
 	//カウントアップ
 	m_cnt++;
 	//プレイヤーを取得
@@ -119,8 +137,18 @@ void Enemy::Update()
 		//ターゲットへのベクトル
 		CVector2D vec = b->m_pos - m_pos;
 		m_ang = atan2(vec.x, vec.y);
-		if (m_cnt >= 210) {
-			//Base::Add(new Bullet(eType_Enemy_Bullet, m_pos, m_ang, 4));
+		if (m_cnt >= 40) {
+			Base::Add(new Bullet(eType_Enemy_Bullet, m_pos, m_ang, 4));
+
+			m_cnt = 0;
+		}
+		if (m_cnt >= 30) {
+			Base::Add(new Bullet(eType_Enemy_Bullet, m_pos, m_ang, 4));
+
+			m_cnt = 0;
+		}
+		if (m_cnt >= 50) {
+			Base::Add(new Bullet(eType_Enemy_Bullet, m_pos, m_ang, 4));
 
 			m_cnt = 0;
 		}
@@ -143,8 +171,15 @@ void Enemy::Update()
 	case eState_Wait:
 		StateWait();
 		break;
+	case eState_Move:
+		StateMove();
+		break;
+	case eState_Rotato:
+		StateRotato();
+		break;
 
 	}
+	m_img.ChangeAnimation(m_dir);
 	m_img.UpdateAnimation();
 }
 

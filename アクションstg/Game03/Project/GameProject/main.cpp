@@ -8,6 +8,8 @@
 #include"Base/Base.h"
 #include"Game/Player.h"
 #include"Game/Enemy.h"
+#include"Game/Gun.h"
+#include"Game/Bullet.h"
 //#include"Game/Field.h"
 //#include"Game/Effect.h"
 #include"Game/Slash.h"
@@ -89,6 +91,7 @@ void Init(void)
 	SOUND("SE_Zasi")->Load("Sound/SE/SE_Zasi.wav");
 	SOUND("BGM_Game")->Load("Sound/BGM/BGM_Game.wav");*/
 
+	ADD_RESOURCE("Bullet", CImage::CreateImage("Image/Bullet.png"));
 	ADD_RESOURCE("Enemy", CImage::CreateImage("Image/Enemy.png", enemy_anim_data, 32, 32));
 	ADD_RESOURCE("Effect_Slash", CImage::CreateImage("Image/Effect_Slash.png", effect_slash_anim_data, 128, 128));
 	ADD_RESOURCE("Player", CImage::CreateImage("Image/Player.png", player_anim_data, 32, 32));
@@ -96,6 +99,9 @@ void Init(void)
 	Base::Add(new Enemy(CVector2D(800, 500), true));
 	//Base::Add(new Field());
 	//Base::Add(new Title());
+	//ADD_RESOURCE("Gun", CImage::CreateImage("Image/Gun.png"));
+	//ADD_RESOURCE("Gun2", CImage::CreateImage("Image/Gun.png"));
+
 
 
 

@@ -6,6 +6,7 @@ private:
 	enum {
 		eState_Idle,
 		eState_Attack,
+		eState_Gun,
 		eState_Damage,
 		eState_Down,
 	};
@@ -24,6 +25,7 @@ private:
 	void StateAttack();
 	void StateDamage();
 	void StateDown();
+	void StateGun();
 public:
 	Player(const CVector2D& p, bool flip);
 	void Update();

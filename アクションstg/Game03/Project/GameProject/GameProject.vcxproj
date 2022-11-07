@@ -15,6 +15,7 @@
     <ClCompile Include="Game\AnimData.cpp" />
     <ClCompile Include="Game\Bullet.cpp" />
     <ClCompile Include="Game\Enemy.cpp" />
+    <ClCompile Include="Game\Gun.cpp" />
     <ClCompile Include="Game\player.cpp" />
     <ClCompile Include="Game\Slash.cpp" />
     <ClCompile Include="main.cpp" />
@@ -24,6 +25,7 @@
     <ClInclude Include="Game\AnimData.h" />
     <ClInclude Include="Game\Bullet.h" />
     <ClInclude Include="Game\Enemy.h" />
+    <ClInclude Include="Game\Gun.h" />
     <ClInclude Include="Game\player.h" />
     <ClInclude Include="Game\Slash.h" />
   </ItemGroup>

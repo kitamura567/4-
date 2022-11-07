@@ -11,9 +11,12 @@ public:
 		eState_Damage,
 		eState_Down,
 		eState_Wait,
+		eState_Move,
+		eState_Rotato,
 	};
 	int m_state;
 	int m_cnt;
+	int m_move_cnt;
 	CImage m_img;
 	bool m_flip;
 	bool m_is_ground;
@@ -28,6 +31,8 @@ public:
 	void StateAttack();
 	void StateDamage();
 	void StateDown();
+	void StateMove();
+	void StateRotato();
 public:
 	Enemy(const CVector2D& p, bool flip);
 	void Update();

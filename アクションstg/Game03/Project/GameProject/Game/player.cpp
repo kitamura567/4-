@@ -2,6 +2,7 @@
 
 
 #include "AnimData.h"
+#include"Gun.h"
 //#include"Field.h"
 //#include "Map.h"
 //#include"Effect.h"
@@ -53,6 +54,9 @@ void Player::Update() {
 	case eState_Attack:
 		StateAttack();
 		break;
+	case eState_Gun:
+		StateGun();
+		break;
 		//ダメージ状態
 	case eState_Damage:
 		StateDamage();
@@ -76,6 +80,7 @@ void Player::Update() {
 	//スクロール設定
 	//m_scroll.x = m_pos.x - 1280 / 2;
 	//m_scroll.y = m_pos.y - 600;
+	
 
 
 }
@@ -179,6 +184,10 @@ void Player::StateIdle()
 		m_state = eState_Attack;
 		m_attack_no++;
 	}
+	/*if (PUSH(CInput::eButton2)) {
+		m_state = eState_Gun;
+		m_attack_no++;
+	}*/
 
 	
 	//移動中なら
@@ -202,11 +211,11 @@ void Player::StateAttack()
 	m_img.ChangeAnimation(eAnimAttack01, false);
 	if (m_img.GetIndex() == 3) {
 		if (m_flip) {
-			Base::Add(new Slash(m_pos + CVector2D(-64, -64), m_flip, eType_Player_Attack, m_attack_no));
+			Base::Add(new Slash(m_pos + CVector2D(-32, -32), m_flip, eType_Player_Attack, m_attack_no));
 
 		}
 		else {
-			Base::Add(new Slash(m_pos + CVector2D(64, -64), m_flip, eType_Player_Attack, m_attack_no));
+			Base::Add(new Slash(m_pos + CVector2D(32, -32), m_flip, eType_Player_Attack, m_attack_no));
 		}
 	}
 	//アニメーションが終了したら
@@ -234,4 +243,24 @@ void Player::StateDown()
 
 		m_kill = true;
 	}
+}
+
+void Player::StateGun()
+{//攻撃アニメーションへ変更
+	/*m_img.ChangeAnimation(eAnimAttack02, false);
+	if (m_img.GetIndex() == 4) {
+		if (m_flip) {
+			Base::Add(new Gun(m_pos + CVector2D(-32, -32), m_flip, eType_Player_Gun, m_attack_no));
+
+		}
+		else {
+			Base::Add(new Gun(m_pos + CVector2D(32, -32), m_flip, eType_Player_Gun, m_attack_no));
+		}
+	}
+	//アニメーションが終了したら
+	if (m_img.CheckAnimationEnd()) {
+		//通常状態へ移行
+		m_state = eState_Idle;
+	}
+	*/
 }

@@ -9,9 +9,9 @@ Slash::Slash(const CVector2D& pos, bool flip, int type, int attack_no) :
 	m_flip = flip;
 	m_pos = pos;
 
-	m_img.SetSize(128, 128);
-	m_img.SetCenter(64, 64);
-	m_rect = CRect(-64, -64, 64, 64);
+	m_img.SetSize(64, 64);
+	m_img.SetCenter(32, 32);
+	m_rect = CRect(-32, -32, 32, 32);
 	m_img.ChangeAnimation(0, false);
 	m_attack_no = attack_no;
 }

@@ -9,6 +9,8 @@ enum {
 	eType_Enemy_Bullet,
 	eType_Player_Bullet,
 	eType_Bullet,
+	eType_Gun,
+	eType_Player_Gun,
 	eType_Goal,
 	eType_Effect,
 	eType_UI,
@@ -31,6 +33,13 @@ public:
 	bool m_kill;
 	Base* Base::FindObject(int type);
 	CRect m_rect;
+	int m_dir;
+	enum {
+	eDown,
+	eLeft,
+	eRight,
+	eUp,
+	};
 	
 public:
 	void SetKill() { m_kill = true; }
