@@ -90,7 +90,7 @@ void Init(void)
 	SOUND("SE_Bomb")->Load("Sound/SE/SE_Bomb.wav");
 	SOUND("SE_Zasi")->Load("Sound/SE/SE_Zasi.wav");
 	SOUND("BGM_Game")->Load("Sound/BGM/BGM_Game.wav");*/
-
+	ADD_RESOURCE("Gauge", CImage::CreateImage("Image/Gauge.png"));
 	ADD_RESOURCE("Bullet", CImage::CreateImage("Image/Bullet.png"));
 	ADD_RESOURCE("Enemy", CImage::CreateImage("Image/Enemy.png", enemy_anim_data, 32, 32));
 	ADD_RESOURCE("Effect_Slash", CImage::CreateImage("Image/Effect_Slash.png", effect_slash_anim_data, 128, 128));

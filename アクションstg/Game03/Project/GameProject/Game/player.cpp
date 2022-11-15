@@ -3,6 +3,7 @@
 
 #include "AnimData.h"
 #include"Gun.h"
+#include"Gauge.h"
 //#include"Field.h"
 //#include "Map.h"
 //#include"Effect.h"
@@ -40,7 +41,14 @@ Player::Player(const CVector2D& pos, bool flip) :
 	m_rad = 32;
 	m_damage_no = -1;
 	m_hp = 500;
-
+	Base::Add(m_gauge = new Gauge(0));
+	//HPÝ’è
+	m_hp = m_max_hp = 1000;
+}
+Player::~Player()
+{
+	if (m_gauge)
+		m_gauge->SetKill();
 }
 void Player::Update() {
 	//m_pos_old = 
@@ -81,7 +89,8 @@ void Player::Update() {
 	//m_scroll.x = m_pos.x - 1280 / 2;
 	//m_scroll.y = m_pos.y - 600;
 	
-
+	m_gauge->SetValue((float)m_hp / m_max_hp);
+	m_gauge->m_pos = CVector2D(0, 0);
 
 }
 
@@ -130,7 +139,15 @@ void Player::Collision(Base* b)
 
 				break;
 			}*/
-
+	case eType_Enemy:
+		if (Base::CollisionRect(this, b)) {
+			m_hp -= 1;
+			if (m_hp < 0) {
+				m_hp = 0;
+				SetKill();
+			}
+		}
+		break;
 	case eType_Enemy_Attack:
 		if (Slash* s = dynamic_cast<Slash*>(b)) {
 			if (m_damage_no != s->GetAttackNo() && Base::CollisionRect(this, s)) {
