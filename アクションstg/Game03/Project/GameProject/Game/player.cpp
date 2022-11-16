@@ -152,7 +152,7 @@ void Player::Collision(Base* b)
 		if (Slash* s = dynamic_cast<Slash*>(b)) {
 			if (m_damage_no != s->GetAttackNo() && Base::CollisionRect(this, s)) {
 				m_damage_no = s->GetAttackNo();
-				m_hp -= 100;
+				m_hp -= 10;
 				if (m_hp <= 0) {
 					m_state = eState_Down;
 				}
@@ -165,6 +165,14 @@ void Player::Collision(Base* b)
 
 	}
 
+}
+
+void Player::Damage(int Attack)
+{
+	m_hp -= Attack;
+	if (m_hp <= 0) {
+		SetKill();
+	}
 }
 
 

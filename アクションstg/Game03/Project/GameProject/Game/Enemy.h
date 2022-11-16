@@ -20,11 +20,13 @@ public:
 	CImage m_img;
 	bool m_flip;
 	bool m_is_ground;
+	int i;
 
 	int m_attack_no;
 	int m_damage_no;
 	int m_hp;
-
+	int m_max_hp;
+	//Gauge* m_gauge;
 
 	void StateWait();
 	void StateIdle();
@@ -38,4 +40,5 @@ public:
 	void Update();
 	void Draw();
 	void Collision(Base* b);
+	void Damage(int Attack);
 };

@@ -34,4 +34,5 @@ public:
 	void Update();
 	void Draw();
 	void Collision(Base* b);
+	void Damage(int Attack);
 };

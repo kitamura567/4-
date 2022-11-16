@@ -319,7 +319,15 @@ TexAnimData enemy_anim_data[] = {
 };
 
 
-
+static TexAnim _effect_shothit[] = {
+	{ 0,1 },
+	{ 1,1 },
+	{ 2,1 },
+	
+};
+TexAnimData effect_shothit_anim_data[] = {
+	ANIMDATA(_effect_shothit),
+};
 
 static TexAnim _effect_blood[] = {
 	{ 0,1 },

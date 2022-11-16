@@ -1,11 +1,12 @@
 #include "Enemy.h"
 #include"AnimData.h"
 //#include"Field.h"
-//#include"Slash.h"
-//#include"Effect.h"
+#include"Slash.h"
+#include"Effect.h"
 //#include"Map.h"
 //#include"trap.h"
 #include "Bullet.h"
+#include"Gauge.h"
 
 void Enemy::StateWait()
 {
@@ -59,9 +60,8 @@ void Enemy::StateAttack()
 void Enemy::StateDamage()
 {
 	m_img.ChangeAnimation(eAnimDamage, false);
-	if (m_img.CheckAnimationEnd()) {
-		m_state = eState_Idle;
-	}
+	m_state = eState_Idle;
+	
 }
 /*void trap::StateWait()
 {
@@ -75,10 +75,11 @@ void Enemy::StateDamage()
 void Enemy::StateDown()
 {
 	m_img.ChangeAnimation(eAnimDown, false);
-	if (m_img.CheckAnimationEnd()) {
+	m_kill = true;
+	/*if (m_img.CheckAnimationEnd()) {
 		//Base::Add(new Effect("Effect_Smoke", m_pos + CVector2D(0, 0), m_flip));
 		m_kill = true;
-	}
+	}*/
 }
 
 void Enemy::StateMove()
@@ -116,8 +117,12 @@ Enemy::Enemy(const CVector2D& p, bool flip) :
 	m_flip = flip;
 	m_attack_no = rand();
 	m_damage_no = -1;
-	m_hp = 50;
+	m_hp = 200;
 	m_dir = eUp;
+
+	//Base::Add(m_gauge = new Gauge(0));
+	//HP設定
+	//m_hp = m_max_hp = 200;
 }
 
 void Enemy::Update()
@@ -135,23 +140,20 @@ void Enemy::Update()
 	//プレイヤーが居れば
 	if (b) {
 		//ターゲットへのベクトル
+		
 		CVector2D vec = b->m_pos - m_pos;
 		m_ang = atan2(vec.x, vec.y);
-		if (m_cnt >= 40) {
-			Base::Add(new Bullet(eType_Enemy_Bullet, m_pos, m_ang, 4));
-
-			m_cnt = 0;
-		}
-		if (m_cnt >= 30) {
-			Base::Add(new Bullet(eType_Enemy_Bullet, m_pos, m_ang, 4));
-
-			m_cnt = 0;
-		}
-		if (m_cnt >= 50) {
-			Base::Add(new Bullet(eType_Enemy_Bullet, m_pos, m_ang, 4));
-
-			m_cnt = 0;
-		}
+		
+			//for(i=0;i<4;i++){
+				if (m_cnt >= 60) {
+					Base::Add(new Bullet(eType_Enemy_Bullet, m_pos, m_ang, 4));
+					Base::Add(new Bullet(eType_Enemy_Bullet, m_pos, m_ang, 3));
+					Base::Add(new Bullet(eType_Enemy_Bullet, m_pos, m_ang, 2));
+					Base::Add(new Bullet(eType_Enemy_Bullet, m_pos, m_ang, 1));
+					m_cnt = 0;
+				}
+			
+		
 	}
 
 
@@ -181,6 +183,8 @@ void Enemy::Update()
 	}
 	m_img.ChangeAnimation(m_dir);
 	m_img.UpdateAnimation();
+	//m_gauge->SetValue((float)m_hp / m_max_hp);
+	//m_gauge->m_pos = CVector2D(0, 0);
 }
 
 void Enemy::Draw()
@@ -200,12 +204,12 @@ void Enemy::Collision(Base* b)
 			b->SetKill();
 			SetKill();
 		}
+		break;
 
 
 
 
-
-		/*case eType_Player_Attack:
+		case eType_Player_Attack:
 			if (Slash* s = dynamic_cast<Slash*>(b)) {
 				if (m_damage_no != s->GetAttackNo() && Base::CollisionRect(this, s)) {
 					m_damage_no = s->GetAttackNo();
@@ -217,11 +221,11 @@ void Enemy::Collision(Base* b)
 					else {
 						m_state = eState_Damage;
 					}
-					Base::Add(new Effect("Effect_Blood", m_pos + CVector2D(0, -128), m_flip));
+					Base::Add(new Effect("Effect_ShotHit", m_pos + CVector2D(0, -64), m_flip));
 				}
 
 			}
-			break;*/
+			break;
 
 	/*case eType_Field:
 		if (Map* m = dynamic_cast<Map*>(b)) {
@@ -236,5 +240,13 @@ void Enemy::Collision(Base* b)
 			}
 		}
 		break;*/
+	}
+}
+
+void Enemy::Damage(int Attack)
+{
+	m_hp -= Attack;
+	if (m_hp <= 0) {
+		SetKill();
 	}
 }
