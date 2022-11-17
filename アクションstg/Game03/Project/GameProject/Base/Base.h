@@ -17,6 +17,7 @@ enum {
 	eType_Player_Attack,
 	eType_Enemy_Attack,
 	eType_Scene,
+	eType_Guard,
 };
 class Base {
 public:

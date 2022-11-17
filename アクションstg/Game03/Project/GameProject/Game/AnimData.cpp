@@ -317,7 +317,15 @@ TexAnimData enemy_anim_data[] = {
 	ANIMDATA(enemyRight),
 	ANIMDATA(enemyUp),
 };
+static TexAnim _effect_guard[] = {
+	{ 0,1 },
+	{ 1,1 },
+	{ 2,1 },
 
+};
+TexAnimData effect_guard_anim_data[] = {
+	ANIMDATA(_effect_guard),
+};
 
 static TexAnim _effect_shothit[] = {
 	{ 0,1 },

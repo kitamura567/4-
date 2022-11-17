@@ -8,9 +8,9 @@ Effect::Effect(const char* name, const CVector2D& pos, bool flip):
 	//座標設定
 	m_pos = pos;
 	//表示サイズ設定
-	m_img.SetSize(64, 64);
+	m_img.SetSize(32, 32);
 	//中心位置設定
-	m_img.SetCenter(32, 32);
+	m_img.SetCenter(16, 16);
 	//再生アニメーション設定(非ループ)
 	m_img.ChangeAnimation(0, false);
 	//反転フラグ

@@ -13,6 +13,7 @@
 //#include"Game/Field.h"
 #include"Game/Effect.h"
 #include"Game/Slash.h"
+#include"Game/Guard.h"
 //#include"Game/Game.h"
 //#include"Title/Title.h"
 
@@ -93,9 +94,12 @@ void Init(void)
 	ADD_RESOURCE("Gauge", CImage::CreateImage("Image/Gauge.png"));
 	ADD_RESOURCE("Bullet", CImage::CreateImage("Image/Bullet.png"));
 	ADD_RESOURCE("Enemy", CImage::CreateImage("Image/Enemy.png", enemy_anim_data, 32, 32));
-	ADD_RESOURCE("Effect_Slash", CImage::CreateImage("Image/Effect_Slash.png", effect_slash_anim_data, 128, 128));
+	//ADD_RESOURCE("Effect_Slash", CImage::CreateImage("Image/Effect_Slash.png", effect_slash_anim_data, 32, 32));
 	ADD_RESOURCE("Player", CImage::CreateImage("Image/Player.png", player_anim_data, 32, 32));
 	ADD_RESOURCE("Effect_ShotHit", CImage::CreateImage("Image/Effect_ShotHit.png", effect_shothit_anim_data, 128, 128));
+	ADD_RESOURCE("Effect_Slash", CImage::CreateImage("Image/Effect_Slash.png", effect_slash_anim_data, 128, 128));
+	ADD_RESOURCE("Effect_Slash", CImage::CreateImage("Image/Guard.png", effect_guard_anim_data, 128, 128));
+
 	Base::Add(new Player(CVector2D(200, 500), false));
 	Base::Add(new Enemy(CVector2D(800, 500), true));
 	//Base::Add(new Field());

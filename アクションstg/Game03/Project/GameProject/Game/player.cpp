@@ -9,6 +9,7 @@
 //#include"Effect.h"
 //#include"Goal.h"
 #include"Slash.h"
+#include"Guard.h"
 //#include"Title.h"
 //#include"END.h"
 
@@ -27,13 +28,13 @@ Player::Player(const CVector2D& pos, bool flip) :
 	
 
 	m_attack_no = rand();
-	
+	m_guard_no = rand();
 
 
 	//中心位置設定
-	m_img.SetCenter(32, 32);
+	m_img.SetCenter(16,16);
 	m_img.SetSize(32, 32);
-	m_rect = CRect(-32, -32, 32, 32);
+	m_rect = CRect(-16, -16, 16, 16);
 	//反転フラグ
 	m_flip = flip;
 	m_state = eState_Idle;
@@ -72,6 +73,9 @@ void Player::Update() {
 		//ダウン状態
 	case eState_Down:
 		StateDown();
+		break;
+	case eState_Guard:
+		StateGuard();
 		break;
 	}
 	//落ちていたら落下中状態へ移行
@@ -139,6 +143,23 @@ void Player::Collision(Base* b)
 
 				break;
 			}*/
+	case eType_Guard:
+		if (Guard* s = dynamic_cast<Guard*>(b)) {
+			if (m_damage_no == s->GetGuardNo() && Base::CollisionRect(this, s)) {
+				
+				m_damage_no = s->GetGuardNo();
+				m_hp -= 0;
+				if (m_hp <= 0) {
+					m_state = eState_Down;
+				}
+				else {
+					m_state = eState_Damage;
+				}
+			}
+		}
+		break;
+
+		
 	case eType_Enemy:
 		if (Base::CollisionRect(this, b)) {
 			m_hp -= 1;
@@ -208,6 +229,10 @@ void Player::StateIdle()
 		//攻撃状態へ移行
 		m_state = eState_Attack;
 		m_attack_no++;
+	}
+	if (PUSH(CInput::eButton2)) {
+		m_state = eState_Guard;
+		m_guard_no++;
 	}
 	/*if (PUSH(CInput::eButton2)) {
 		m_state = eState_Gun;
@@ -288,4 +313,24 @@ void Player::StateGun()
 		m_state = eState_Idle;
 	}
 	*/
+}
+
+void Player::StateGuard()
+{
+	m_img.ChangeAnimation(eAnimGuard, false);
+	//3番目のパターンなら
+	if (m_img.GetIndex() == 3) {
+		if (m_flip) {
+			Base::Add(new Guard(m_pos + CVector2D(-64, -64), m_flip, eType_Guard, m_guard_no));
+		}
+		else {
+			Base::Add(new Guard(m_pos + CVector2D(64, -64), m_flip, eType_Guard, m_guard_no));
+		}
+	}
+	//アニメーションが終了したら
+	if (m_img.CheckAnimationEnd()) {
+		//通常状態へ移行
+		m_state = eState_Idle;
+	}
+
 }

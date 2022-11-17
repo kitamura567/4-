@@ -9,9 +9,10 @@ private:
 		eState_Gun,
 		eState_Damage,
 		eState_Down,
+		eState_Guard,
 	};
 	int m_attack_no;
-
+	int m_guard_no;
 	
 
 	int m_state;
@@ -28,6 +29,7 @@ private:
 	void StateDamage();
 	void StateDown();
 	void StateGun();
+	void StateGuard();
 public:
 	Player(const CVector2D& p, bool flip);
 	~Player();
