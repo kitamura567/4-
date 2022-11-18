@@ -10,6 +10,7 @@
 //#include"Goal.h"
 #include"Slash.h"
 #include"Guard.h"
+#include"Bullet.h"
 //#include"Title.h"
 //#include"END.h"
 
@@ -29,6 +30,7 @@ Player::Player(const CVector2D& pos, bool flip) :
 
 	m_attack_no = rand();
 	m_guard_no = rand();
+	m_gun_no = rand();
 
 
 	//中心位置設定
@@ -77,6 +79,7 @@ void Player::Update() {
 	case eState_Guard:
 		StateGuard();
 		break;
+	
 	}
 	//落ちていたら落下中状態へ移行
 	//if (m_is_ground && m_vec.y > GRAVITY * 4)
@@ -158,6 +161,21 @@ void Player::Collision(Base* b)
 			}
 		}
 		break;
+	/*case eType_Gun:
+		if (Gun s = dynamic_cast<Gun*>(b)) {
+			if (m_damage_no == s->GetGunNo() && Base::CollisionRect(this, s)) {
+
+				m_damage_no = s->GetGunNo();
+				m_hp -= 0;
+				if (m_hp <= 0) {
+					m_state = eState_Down;
+				}
+				else {
+					m_state = eState_Damage;
+				}
+			}
+		}
+		break;*/
 
 		
 	case eType_Enemy:
@@ -234,10 +252,11 @@ void Player::StateIdle()
 		m_state = eState_Guard;
 		m_guard_no++;
 	}
-	/*if (PUSH(CInput::eButton2)) {
+	
+	if (PUSH(CInput::eButton3)) {
 		m_state = eState_Gun;
-		m_attack_no++;
-	}*/
+		m_gun_no++;
+	}
 
 	
 	//移動中なら
@@ -300,19 +319,19 @@ void Player::StateGun()
 	/*m_img.ChangeAnimation(eAnimAttack02, false);
 	if (m_img.GetIndex() == 4) {
 		if (m_flip) {
-			Base::Add(new Gun(m_pos + CVector2D(-32, -32), m_flip, eType_Player_Gun, m_attack_no));
-
+			Base::Add(new Gun(m_pos + CVector2D(-32, -32), m_flip, eType_Player_Gun, m_gun_no));
+			
 		}
 		else {
-			Base::Add(new Gun(m_pos + CVector2D(32, -32), m_flip, eType_Player_Gun, m_attack_no));
+			Base::Add(new Gun(m_pos + CVector2D(32, -32), m_flip, eType_Player_Gun, m_gun_no));
 		}
 	}
 	//アニメーションが終了したら
 	if (m_img.CheckAnimationEnd()) {
 		//通常状態へ移行
 		m_state = eState_Idle;
-	}
-	*/
+	}*/
+	
 }
 
 void Player::StateGuard()

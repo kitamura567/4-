@@ -346,6 +346,15 @@ static TexAnim _effect_blood[] = {
 TexAnimData effect_blood_anim_data[] = {
 	ANIMDATA(_effect_blood),
 };
+static TexAnim gun[] = {
+	{ 0,2 },
+	{ 1,2 },
+	{ 2,2 },
+	
+};
+TexAnimData gun_anim_data[] = {
+	ANIMDATA(gun),
+};
 static TexAnim _effect_smoke[] = {
 	{ 0,2 },
 	{ 1,2 },

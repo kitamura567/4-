@@ -221,7 +221,7 @@ void Enemy::Collision(Base* b)
 					else {
 						m_state = eState_Damage;
 					}
-					Base::Add(new Effect("Effect_ShotHit", m_pos + CVector2D(0, -64), m_flip));
+					Base::Add(new Effect("Effect_ShotHit", m_pos + CVector2D(0, -16), m_flip));
 				}
 
 			}

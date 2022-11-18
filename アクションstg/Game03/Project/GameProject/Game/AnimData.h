@@ -41,3 +41,4 @@ extern TexAnimData effect_smoke_anim_data[];
 extern TexAnimData effect_slash_anim_data[];
 extern TexAnimData effect_bomb_anim_data[];
 extern TexAnimData effect_guard_anim_data[];
+extern TexAnimData gun_anim_data[];

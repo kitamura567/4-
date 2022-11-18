@@ -13,7 +13,7 @@ private:
 	};
 	int m_attack_no;
 	int m_guard_no;
-	
+	int m_gun_no;
 
 	int m_state;
 	int m_damage_no;
