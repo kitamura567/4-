@@ -15,7 +15,8 @@
 #include"Game/Slash.h"
 #include"Game/Guard.h"
 //#include"Game/Game.h"
-//#include"Title/Title.h"
+#include"Game/Title.h"
+#include"Game/UI.h"
 
 
 //--------------------------------------------
@@ -99,11 +100,11 @@ void Init(void)
 	ADD_RESOURCE("Effect_ShotHit", CImage::CreateImage("Image/Effect_ShotHit.png", effect_shothit_anim_data, 32, 32));
 	ADD_RESOURCE("Effect_Slash", CImage::CreateImage("Image/Effect_Slash.png", effect_slash_anim_data, 128, 128));
 	ADD_RESOURCE("Effect_Slash", CImage::CreateImage("Image/Guard.png", effect_guard_anim_data, 128, 128));
-
-	Base::Add(new Player(CVector2D(200, 500), false));
-	Base::Add(new Enemy(CVector2D(800, 500), true));
+	ADD_RESOURCE("Title", CImage::CreateImage("Image/Title.png"));
+	
 	//Base::Add(new Field());
-	//Base::Add(new Title());
+	Base::Add(new Title());
+	Base::Add(new UI());
 	//ADD_RESOURCE("Gun", CImage::CreateImage("Image/Gun.png"));
 	//ADD_RESOURCE("Gun2", CImage::CreateImage("Image/Gun.png"));
 

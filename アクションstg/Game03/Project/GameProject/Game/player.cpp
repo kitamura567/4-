@@ -178,7 +178,7 @@ void Player::Collision(Base* b)
 		break;*/
 
 		
-	case eType_Enemy:
+	/*case eType_Enemy:
 		if (Base::CollisionRect(this, b)) {
 			m_hp -= 1;
 			if (m_hp < 0) {
@@ -186,7 +186,7 @@ void Player::Collision(Base* b)
 				SetKill();
 			}
 		}
-		break;
+		break;*/
 	case eType_Enemy_Attack:
 		if (Slash* s = dynamic_cast<Slash*>(b)) {
 			if (m_damage_no != s->GetAttackNo() && Base::CollisionRect(this, s)) {

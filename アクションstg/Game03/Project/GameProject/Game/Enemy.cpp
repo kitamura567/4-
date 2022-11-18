@@ -202,7 +202,7 @@ void Enemy::Collision(Base* b)
 		if (Base::CollisionCircle(this, b))
 		{
 			b->SetKill();
-			SetKill();
+			
 		}
 		break;
 
