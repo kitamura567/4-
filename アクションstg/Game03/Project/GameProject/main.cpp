@@ -17,6 +17,7 @@
 //#include"Game/Game.h"
 #include"Game/Title.h"
 #include"Game/UI.h"
+#include"Game/Map.h"
 
 
 //--------------------------------------------
@@ -101,10 +102,12 @@ void Init(void)
 	ADD_RESOURCE("Effect_Slash", CImage::CreateImage("Image/Effect_Slash.png", effect_slash_anim_data, 128, 128));
 	ADD_RESOURCE("Effect_Slash", CImage::CreateImage("Image/Guard.png", effect_guard_anim_data, 128, 128));
 	ADD_RESOURCE("Title", CImage::CreateImage("Image/Title.png"));
-	
+	ADD_RESOURCE("MapTip", CImage::CreateImage("Image/MapTip.png"));
+
 	//Base::Add(new Field());
 	Base::Add(new Title());
 	Base::Add(new UI());
+	Base::Add(new Map());
 	//ADD_RESOURCE("Gun", CImage::CreateImage("Image/Gun.png"));
 	//ADD_RESOURCE("Gun2", CImage::CreateImage("Image/Gun.png"));
 

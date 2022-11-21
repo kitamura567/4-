@@ -26,6 +26,7 @@ public:
 	CVector2D m_vec;
 	int m_type;
 	CVector2D m_pos;
+	CVector2D m_pos_old;
 	static CVector2D m_scroll;
 	static std::list<Base*>m_list;
 	float m_ang;

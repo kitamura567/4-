@@ -5,7 +5,7 @@
 #include"Gun.h"
 #include"Gauge.h"
 //#include"Field.h"
-//#include "Map.h"
+#include "Map.h"
 //#include"Effect.h"
 //#include"Goal.h"
 #include"Slash.h"
@@ -22,8 +22,7 @@ Player::Player(const CVector2D& pos, bool flip) :
 	//再生アニメーション設定
 	m_img.ChangeAnimation(0);
 	//座標設定
-	//m_pos_old = 
-	m_pos = pos;
+	m_pos_old = m_pos = pos;
 
 	//スクロール設定
 	
@@ -43,7 +42,7 @@ Player::Player(const CVector2D& pos, bool flip) :
 	m_is_ground = true;
 	m_rad = 32;
 	m_damage_no = -1;
-	m_hp = 500;
+	m_hp = 100;
 	Base::Add(m_gauge = new Gauge(0));
 	//HP設定
 	m_hp = m_max_hp = 1000;
@@ -54,7 +53,7 @@ Player::~Player()
 		m_gauge->SetKill();
 }
 void Player::Update() {
-	//m_pos_old = 
+	m_pos_old = 
 	m_pos;
 	switch (m_state) {
 		//通常状態
@@ -123,29 +122,21 @@ void Player::Collision(Base* b)
 				//Base::Add(new END());
 				//}
 			}
-			break;
-			/*case eType_Field:
+			break;*/
+			case eType_Field:
 				if (Map* m = dynamic_cast<Map*>(b)) {
-					int t = m->CollisionMap(CVector2D(m_pos.x, m_pos.y), m_rect);
+					int t = m->CollisionMap(m_pos);
 					if (t != 0)
-						m_pos.x = m_pos.x;
-					t = m->CollisionMap(CVector2D(m_pos.x, m_pos.y), m_rect);
-					if (t != 0) {
-						m_pos.y = m_pos.y;
-						m_vec.y = 0;
-						m_is_ground = true;
-					}
-					if (m_pos.y > m->GetGroundY()) {
-
-						SetKill();
-
-					}
+						m_pos = m_pos_old;
 				}
-
-
-
 				break;
-			}*/
+
+	
+
+
+
+				
+			
 	case eType_Guard:
 		if (Guard* s = dynamic_cast<Guard*>(b)) {
 			if (m_damage_no == s->GetGuardNo() && Base::CollisionRect(this, s)) {
