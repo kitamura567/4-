@@ -3,6 +3,7 @@
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 
+#include "Game/Text.h"
 #include "Game/AnimData.h"
 //#include "Title/Title.h"
 #include"Base/Base.h"
@@ -103,11 +104,13 @@ void Init(void)
 	ADD_RESOURCE("Effect_Slash", CImage::CreateImage("Image/Guard.png", effect_guard_anim_data, 128, 128));
 	ADD_RESOURCE("Title", CImage::CreateImage("Image/Title.png"));
 	ADD_RESOURCE("MapTip", CImage::CreateImage("Image/MapTip.png"));
-
+	//ADD_RESOURCE("haikei", CImage::CreateImage("Image/haikei.png"));
+	CFont* font = new CFont("Fonts/HuiFont29.ttf", 32);
 	//Base::Add(new Field());
 	Base::Add(new Title());
 	Base::Add(new UI());
 	Base::Add(new Map());
+	Base::Add(new Text("talk.txt", font));
 	//ADD_RESOURCE("Gun", CImage::CreateImage("Image/Gun.png"));
 	//ADD_RESOURCE("Gun2", CImage::CreateImage("Image/Gun.png"));
 

@@ -15,11 +15,12 @@ void Enemy::StateWait()
 		m_state = eState_Idle;
 		m_move_cnt = 0;
 	}
+	
 }
 
 void Enemy::StateIdle()
 {
-	//const float move_speed = 6;
+	const float move_speed = 6;
 	bool move_flag = false;
 	//const float jump_pow = 12;
 	Base* player = Base::FindObject(eType_Player);
@@ -37,7 +38,6 @@ void Enemy::StateIdle()
 		m_state = eState_Wait;
 		break;
 	}
-		
 	
 }
 
@@ -63,14 +63,7 @@ void Enemy::StateDamage()
 	m_state = eState_Idle;
 	
 }
-/*void trap::StateWait()
-{
-	m_img.ChangeAnimation(eAnimIdle);
-	if (--m_cnt <= 0) {
-		m_cnt = rand() % 120 + 180;
-		m_state = eState_Idle;
-	}
-}*/
+
 
 void Enemy::StateDown()
 {

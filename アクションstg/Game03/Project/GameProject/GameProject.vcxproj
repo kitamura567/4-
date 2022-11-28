@@ -23,6 +23,7 @@
     <ClCompile Include="Game\Map.cpp" />
     <ClCompile Include="Game\player.cpp" />
     <ClCompile Include="Game\Slash.cpp" />
+    <ClCompile Include="Game\Text.cpp" />
     <ClCompile Include="Game\Title.cpp" />
     <ClCompile Include="Game\UI.cpp" />
     <ClCompile Include="main.cpp" />
@@ -40,6 +41,7 @@
     <ClInclude Include="Game\Map.h" />
     <ClInclude Include="Game\player.h" />
     <ClInclude Include="Game\Slash.h" />
+    <ClInclude Include="Game\Text.h" />
     <ClInclude Include="Game\Title.h" />
     <ClInclude Include="Game\UI.h" />
   </ItemGroup>

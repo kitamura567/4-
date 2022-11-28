@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Title.h"
+#include "Map.h"
 
 Game::Game() :Base(eType_Scene)
 {
@@ -10,6 +11,8 @@ Game::Game() :Base(eType_Scene)
 	Base::Add(new Player(CVector2D(200, 500), false));
 	Base::Add(new Enemy(CVector2D(800, 500), true));
 	m_img.Load("Image/UI.png");
+	
+	
 	
 
 }
