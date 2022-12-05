@@ -2,7 +2,7 @@
 #include"Enemy.h"
 #include"player.h"
 #include"Guard.h"
-//#include"Map.h"
+#include"Map.h"
 
 Bullet::Bullet(int type, const CVector2D& pos, float ang, float speed) : Base(type)
 {
@@ -30,13 +30,13 @@ void Bullet::Draw() {
 void Bullet::Collision(Base* b)
 {
 	switch (b->m_type) {
-	/*case eType_Field:
+	case eType_Field:
 		if (Map* m = dynamic_cast<Map*>(b)) {
 			int t = m->CollisionMap(m_pos);
 			if (t != 0)
 				SetKill();
 		}
-		break;*/
+		break;
 	case eType_Guard:
 		if (m_type == eType_Enemy_Bullet && Base::CollisionCircle(this, b)) {
 			SetKill();

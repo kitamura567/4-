@@ -125,9 +125,12 @@ void Player::Collision(Base* b)
 			break;*/
 			case eType_Field:
 				if (Map* m = dynamic_cast<Map*>(b)) {
-					int t = m->CollisionMap(m_pos);
+					int t = m->CollisionMap(CVector2D(m_pos.x, m_pos_old.y), m_rect);
 					if (t != 0)
-						m_pos = m_pos_old;
+						m_pos.x = m_pos_old.x;
+					t = m->CollisionMap(CVector2D(m_pos_old.x, m_pos.y),m_rect);
+					if (t != 0)
+						m_pos.y = m_pos_old.y;
 				}
 				break;
 

@@ -14,6 +14,7 @@ private:
 public:
 	Map();
 	void Draw();
+	void Update();
 	//指定座標のチップ番号を取得
 	int GetTip(const CVector2D& pos);
 	//指定列、指定行のマップチップを取得
