@@ -142,7 +142,7 @@ void Player::Collision(Base* b)
 			
 	case eType_Guard:
 		if (Guard* s = dynamic_cast<Guard*>(b)) {
-			if (m_damage_no == s->GetGuardNo() && Base::CollisionRect(this, s)) {
+			if (m_damage_no != s->GetGuardNo() && Base::CollisionRect(this, s)) {
 				
 				m_damage_no = s->GetGuardNo();
 				m_hp -= 0;

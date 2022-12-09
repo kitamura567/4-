@@ -40,8 +40,8 @@ void Bullet::Collision(Base* b)
 	case eType_Guard:
 		if (m_type == eType_Enemy_Bullet && Base::CollisionCircle(this, b)) {
 			SetKill();
-			if (Player* p = dynamic_cast<Player*>(b)) {
-				p->Damage(0);
+			if (Player* d = dynamic_cast<Player*>(b)) {
+				d->Damage(0);
 			}
 
 		}
