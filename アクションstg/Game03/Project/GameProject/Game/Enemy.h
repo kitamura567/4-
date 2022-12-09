@@ -21,6 +21,7 @@ public:
 	bool m_flip;
 	bool m_is_ground;
 	int i;
+	int AIstate;
 
 	int m_attack_no;
 	int m_damage_no;

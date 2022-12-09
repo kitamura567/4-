@@ -41,7 +41,7 @@ void Bullet::Collision(Base* b)
 		if (m_type == eType_Enemy_Bullet && Base::CollisionCircle(this, b)) {
 			SetKill();
 			if (Player* p = dynamic_cast<Player*>(b)) {
-				p->SetKill();
+				p->Damage(0);
 			}
 
 		}

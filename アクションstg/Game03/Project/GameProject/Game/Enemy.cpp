@@ -11,7 +11,7 @@
 void Enemy::StateWait()
 {
 	m_move_cnt += 1;
-	if (m_move_cnt > 180) {
+	if (m_move_cnt > 60) {
 		m_state = eState_Idle;
 		m_move_cnt = 0;
 	}
@@ -77,8 +77,8 @@ void Enemy::StateDown()
 
 void Enemy::StateMove()
 {
-	//CVector2D DIR(sin(m_ang), cos(m_ang));
-	//m_pos += DIR * 1.0;
+	CVector2D DIR(sin(m_ang), cos(m_ang));
+	m_pos += DIR * 1.0;
 	m_move_cnt += 1;
 	if (m_move_cnt > 180) {
 		m_state = eState_Idle;
@@ -112,6 +112,7 @@ Enemy::Enemy(const CVector2D& p, bool flip) :
 	m_damage_no = -1;
 	m_hp = 200;
 	m_dir = eUp;
+	AIstate = 0;
 
 	//Base::Add(m_gauge = new Gauge(0));
 	//HPê›íË
@@ -138,11 +139,9 @@ void Enemy::Update()
 		m_ang = atan2(vec.x, vec.y);
 		
 			//for(i=0;i<4;i++){
-				if (m_cnt >= 60) {
+				if (m_cnt >= 10) {
 					Base::Add(new Bullet(eType_Enemy_Bullet, m_pos, m_ang, 4));
-					Base::Add(new Bullet(eType_Enemy_Bullet, m_pos, m_ang, 3));
-					Base::Add(new Bullet(eType_Enemy_Bullet, m_pos, m_ang, 2));
-					Base::Add(new Bullet(eType_Enemy_Bullet, m_pos, m_ang, 1));
+				
 					m_cnt = 0;
 				}
 			

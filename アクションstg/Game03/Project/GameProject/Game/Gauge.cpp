@@ -16,7 +16,7 @@ void Gauge::Draw() {
 
 	//ゲージの表示
 	//ゲージの長さ 4は枠の太さ
-	int border = 2;
+	int border = 4;
 	int width = (256 - border - border) * m_par;
 	int y = (m_gauge_type + 1);
 	m_img.SetRect(border, (64 * y) + border, 4 + width, (64 * (y + 1)) - border);
