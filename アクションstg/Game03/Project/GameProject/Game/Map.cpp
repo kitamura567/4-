@@ -46,7 +46,7 @@ void Map::Draw()
 			if (stage1data[i][j] == 0)continue;
 			int t = stage1data[i][j];
 			//画像切り抜き
-			m_img.SetRect(32 * t, 0, 32 * t + 32, 32);
+			m_img.SetRect(16 * t, 0, 16 * t + 16, 16);
 			//表示サイズ設定
 			m_img.SetSize(MAP_TIP_SIZE, MAP_TIP_SIZE);
 			//表示位置設定

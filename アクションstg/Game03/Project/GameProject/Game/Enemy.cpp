@@ -43,6 +43,31 @@ void Enemy::StateIdle()
 
 void Enemy::StateAttack()
 {
+	//カウントアップ
+	m_cnt++;
+	//プレイヤーを取得
+	Base* b = Base::FindObject(eType_Player);
+	//プレイヤーが居れば
+	if (b) {
+		//ターゲットへのベクトル
+
+		CVector2D vec = b->m_pos - m_pos;
+		m_ang = atan2(vec.x, vec.y);
+
+		//for(i=0;i<4;i++){
+		if (m_cnt >= 10) {
+			Base::Add(new Bullet(eType_Enemy_Bullet, m_pos, m_ang, 4));
+
+			m_cnt = 0;
+		}
+
+
+	}
+	m_move_cnt += 1;
+	if (m_move_cnt > 180) {
+		m_state = eState_Move;
+		m_move_cnt = 0;
+	}
 	m_img.ChangeAnimation(eAnimAttack01, false);
 	/*if (m_img.GetIndex() == 3) {
 		if (m_flip) {
@@ -81,7 +106,7 @@ void Enemy::StateMove()
 	m_pos += DIR * 1.0;
 	m_move_cnt += 1;
 	if (m_move_cnt > 180) {
-		m_state = eState_Idle;
+		m_state = eState_Attack;
 		m_move_cnt = 0;
 	}
 }
@@ -127,26 +152,6 @@ void Enemy::Update()
 		m_is_ground = false;
 	m_vec.y += GRAVITY;*/
 	
-	//カウントアップ
-	m_cnt++;
-	//プレイヤーを取得
-	Base* b = Base::FindObject(eType_Player);
-	//プレイヤーが居れば
-	if (b) {
-		//ターゲットへのベクトル
-		
-		CVector2D vec = b->m_pos - m_pos;
-		m_ang = atan2(vec.x, vec.y);
-		
-			//for(i=0;i<4;i++){
-				if (m_cnt >= 10) {
-					Base::Add(new Bullet(eType_Enemy_Bullet, m_pos, m_ang, 4));
-				
-					m_cnt = 0;
-				}
-			
-		
-	}
 
 
 	switch (m_state) {

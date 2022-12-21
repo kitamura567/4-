@@ -104,14 +104,12 @@ void Init(void)
 	ADD_RESOURCE("Effect_Slash", CImage::CreateImage("Image/Effect_Slash.png", effect_slash_anim_data, 128, 128));
 	ADD_RESOURCE("Effect_Slash", CImage::CreateImage("Image/Guard.png", effect_guard_anim_data, 128, 128));
 	ADD_RESOURCE("Title", CImage::CreateImage("Image/Title.png"));
-	ADD_RESOURCE("MapTip", CImage::CreateImage("Image/MapTip.png"));
-	ADD_RESOURCE("Sky", CImage::CreateImage("Image/Sky.png"));
-	ADD_RESOURCE("Town", CImage::CreateImage("Image/Town.png"));
-	ADD_RESOURCE("ForeGround", CImage::CreateImage("Image/ForeGround.png"));
+	ADD_RESOURCE("MapTip", CImage::CreateImage("Image/kusa1-kusa2.png"));
+	
 
 	//ADD_RESOURCE("haikei", CImage::CreateImage("Image/haikei.png"));
 	CFont* font = new CFont("Fonts/HuiFont29.ttf", 32);
-	//Base::Add(new Field());
+	Base::Add(new Field());
 	Base::Add(new Title());
 	Base::Add(new UI());
 	Base::Add(new Map());
