@@ -1,9 +1,9 @@
 #include "Enemy.h"
 #include"AnimData.h"
-//#include"Field.h"
+#include"Field.h"
 #include"Slash.h"
 #include"Effect.h"
-//#include"Map.h"
+#include"Map.h"
 //#include"trap.h"
 #include "Bullet.h"
 #include"Gauge.h"
@@ -60,9 +60,10 @@ void Enemy::StateAttack()
 
 			m_cnt = 0;
 		}
-
+		
 
 	}
+	
 	m_move_cnt += 1;
 	if (m_move_cnt > 180) {
 		m_state = eState_Move;
@@ -153,7 +154,7 @@ void Enemy::Update()
 	m_vec.y += GRAVITY;*/
 	
 
-
+	m_pos_old = m_pos;
 	switch (m_state) {
 	case eState_Idle:
 		StateIdle();
@@ -204,6 +205,20 @@ void Enemy::Collision(Base* b)
 		break;
 
 
+		
+		case eType_Field:
+			if (Map* m = dynamic_cast<Map*>(b)) {
+			
+				int t = m->CollisionMap(CVector2D(m_pos.x, m_pos_old.y),m_rect);
+				if (t != 0)
+					m_pos.x = m_pos_old.x;
+				t = m->CollisionMap(CVector2D(m_pos_old.x, m_pos.y),m_rect);
+				if (t != 0)
+					m_pos.y = m_pos_old.y;
+			}
+			break;
+
+		
 
 
 		case eType_Player_Attack:
